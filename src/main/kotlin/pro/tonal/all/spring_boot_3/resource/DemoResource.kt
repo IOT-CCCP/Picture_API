@@ -16,7 +16,7 @@ class DemoResource {
     @Consumes(MediaType.APPLICATION_JSON)
     fun getMap():Map<String,String>{
         val map = HashMap<String, String>()
-        map["name"] = "tonal"
+        map["name"] = "tonal-all"
         map["age"] = "21"
         return map
     }
