@@ -1,0 +1,34 @@
+spring:
+  datasource:
+    url: jdbc:mysql://rsshub.tonal-all.pro:3306/tonal
+    username: root
+    password: Maker0000.
+  data:
+    redis:
+      host: rsshub.tonal-all.pro
+      database: 0
+      password: Maker0000.
+      jedis:
+        pool:
+          max-wait: 10ms
+          max-active: 10
+          min-idle: 2
+          max-idle: 8
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+    open-in-view: false
+#  web:
+#    resources:
+#      chain:
+#        compressed: true
+#        cache: true
+#      cache:
+#        period: 86400
+
+server:
+  port: 8006
+
+  servlet:
+    register-default-servlet: true
