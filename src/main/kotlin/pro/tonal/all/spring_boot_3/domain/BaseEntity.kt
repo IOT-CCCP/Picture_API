@@ -11,5 +11,5 @@ import java.io.Serializable
 open class BaseEntity:Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private var id: Int = -1
+    var id: Int? = null
 }

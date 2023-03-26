@@ -3,6 +3,7 @@ package pro.tonal.all.spring_boot_3.infrastructure.utility
 import com.aliyun.oss.*
 import com.aliyun.oss.common.comm.Protocol
 import com.aliyun.oss.model.PutObjectRequest
+import jakarta.validation.Valid
 import org.glassfish.jersey.media.multipart.FormDataContentDisposition
 import org.springframework.beans.factory.annotation.Value
 import pro.tonal.all.spring_boot_3.domain.picture.Picture
@@ -13,7 +14,7 @@ import java.text.SimpleDateFormat
 
 
 
-class OSSTools {
+object OSSTools {
     @Value("\${aliyun.domain}")
     private lateinit var domain:String
 
@@ -54,6 +55,31 @@ class OSSTools {
             ossClint?.shutdown()
         }
     }
+
+    fun deletePicture(@Valid p: Picture){
+        val fileName = p.url?.let { it.substring(it.lastIndexOf(dir)) }
+        try {
+            ossClint?.deleteObject(bucketName,fileName)
+        }catch (oe:OSSException){
+            println("Caught an OSSException, which means your request made it to OSS, "
+                    + "but was rejected with an error response for some reason.")
+            println("Error Message:" + oe.errorMessage)
+            println("Error Code:" + oe.errorCode)
+            println("Request ID:" + oe.requestId)
+            println("Host ID:" + oe.hostId)
+        }catch (ce:ClientException){
+            println("Caught an ClientException, which means the client encountered "
+                    + "a serious internal problem while trying to communicate with OSS, "
+                    + "such as not being able to access the network.")
+            println("Error Message:" + ce.message)
+        }finally {
+            ossClint?.shutdown()
+        }
+
+
+
+    }
+
     private fun getOSSClint(): OSS? {
         val endpoint = "https://$domain"
         val clientConfig = ClientBuilderConfiguration()

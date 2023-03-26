@@ -18,6 +18,7 @@ class JerseyConfiguration : ResourceConfig() {
     init {
         scanPackages("pro.tonal.all.spring_boot_3.resource")
         scanPackages("pro.tonal.all.spring_boot_3.infrastructure.jaxrc")
+        scanPackages("pro.tonal.all.spring_boot_3.infrastructure.configuration.jerseyProvider")
     }
 
     /**

@@ -5,10 +5,11 @@ import jakarta.inject.Named
 import org.glassfish.jersey.media.multipart.FormDataContentDisposition
 import pro.tonal.all.spring_boot_3.infrastructure.utility.OSSTools
 import java.io.InputStream
+import java.util.*
 
 @Named
 class PictureService(private var pictureRepository:PictureRepository) {
-    private val ossTools = OSSTools()
+    private val ossTools = OSSTools
     fun createPicture(title:String, stream: InputStream, fileDetail: FormDataContentDisposition): Picture {
         val picture = Picture().apply {
             this.title = title
@@ -19,6 +20,17 @@ class PictureService(private var pictureRepository:PictureRepository) {
 
     fun getAllPicture(): List<Picture> {
         return pictureRepository.findAll()
+    }
+    fun findPictureById(id:Int): Optional<Picture> {
+        return pictureRepository.findById(id)
+    }
+    fun updatePicture(picture: Picture){
+        pictureRepository.save(picture)
+    }
+    fun deletePicture(id:Int){
+        val p = pictureRepository.findById(id).get()
+        ossTools.deletePicture(p)
+        pictureRepository.delete(p)
     }
 
 }
