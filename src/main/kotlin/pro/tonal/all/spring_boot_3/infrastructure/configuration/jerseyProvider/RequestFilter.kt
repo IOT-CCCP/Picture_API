@@ -1,4 +1,4 @@
-package pro.tonal.all.spring_boot_3.configuration.jerseyProvider
+package pro.tonal.all.spring_boot_3.infrastructure.configuration.jerseyProvider
 
 import jakarta.ws.rs.container.ContainerRequestContext
 import jakarta.ws.rs.container.ContainerRequestFilter

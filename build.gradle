@@ -23,11 +23,15 @@ repositories {
 }
 
 dependencies {
+
+    implementation 'com.aliyun.oss:aliyun-sdk-oss:3.16.1'
     implementation 'org.springframework.boot:spring-boot-starter-cache'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-data-redis'
     implementation 'org.springframework.boot:spring-boot-starter-jdbc'
     implementation 'org.springframework.boot:spring-boot-starter-jersey'
+    implementation 'org.glassfish.jersey.media:jersey-media-multipart:2.25'
+    implementation 'org.springframework.boot:spring-boot-configuration-processor'
     implementation 'com.fasterxml.jackson.module:jackson-module-kotlin'
     implementation 'org.jetbrains.kotlin:kotlin-reflect'
     compileOnly 'org.projectlombok:lombok'

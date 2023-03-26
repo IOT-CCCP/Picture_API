@@ -1,4 +1,4 @@
-package pro.tonal.all.spring_boot_3.configuration
+package pro.tonal.all.spring_boot_3.infrastructure.configuration
 
 import jakarta.ws.rs.ApplicationPath
 import jakarta.ws.rs.Path
@@ -17,6 +17,7 @@ import java.util.stream.Collectors
 class JerseyConfiguration : ResourceConfig() {
     init {
         scanPackages("pro.tonal.all.spring_boot_3.resource")
+        scanPackages("pro.tonal.all.spring_boot_3.infrastructure.jaxrc")
     }
 
     /**

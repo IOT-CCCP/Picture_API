@@ -1,4 +1,13 @@
 spring:
+  jersey:
+    type: servlet
+    servlet:
+      load-on-startup: 1
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 100MB
+      max-request-size: 100MB
   datasource:
     url: jdbc:mysql://rsshub.tonal-all.pro:3306/tonal
     username: root
@@ -17,7 +26,7 @@ spring:
   jpa:
     show-sql: true
     hibernate:
-      ddl-auto: none
+      ddl-auto: update
     open-in-view: false
 #  web:
 #    resources:
@@ -32,3 +41,10 @@ server:
 
   servlet:
     register-default-servlet: true
+
+aliyun:
+  domain: oss-cn-beijing.aliyun.com
+  bucketName: tonall
+  accessKeyId: LTAI5tLcm3H72Rm1Wmcskwv7
+  accessKeySecret: Dsz2UZcNGNHit64TkfcLvkcGYkI8jJ
+  dir: /img
