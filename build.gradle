@@ -30,7 +30,8 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-redis'
     implementation 'org.springframework.boot:spring-boot-starter-jdbc'
     implementation 'org.springframework.boot:spring-boot-starter-jersey'
-    implementation 'org.glassfish.jersey.media:jersey-media-multipart:2.25'
+    implementation 'org.glassfish.jersey.media:jersey-media-multipart:3.1.1'
+    implementation 'com.sun.jersey.contribs:jersey-multipart:1.19.4'
     implementation 'org.springframework.boot:spring-boot-configuration-processor'
     implementation 'com.fasterxml.jackson.module:jackson-module-kotlin'
     implementation 'org.jetbrains.kotlin:kotlin-reflect'
@@ -38,7 +39,6 @@ dependencies {
     runtimeOnly 'com.mysql:mysql-connector-j'
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    implementation "org.jetbrains.kotlin:kotlin-script-runtime:1.7.22"
 }
 
 tasks.withType(KotlinCompile) {

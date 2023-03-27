@@ -3,9 +3,11 @@ package pro.tonal.all.spring_boot_3.infrastructure.utility
 import com.aliyun.oss.*
 import com.aliyun.oss.common.comm.Protocol
 import com.aliyun.oss.model.PutObjectRequest
+import jakarta.inject.Named
 import jakarta.validation.Valid
 import org.glassfish.jersey.media.multipart.FormDataContentDisposition
 import org.springframework.beans.factory.annotation.Value
+import org.springframework.context.annotation.Bean
 import pro.tonal.all.spring_boot_3.domain.picture.Picture
 import java.io.InputStream
 import java.text.SimpleDateFormat
@@ -13,8 +15,8 @@ import java.text.SimpleDateFormat
 
 
 
-
-object OSSTools {
+@Named
+open class OSSTools {
     @Value("\${aliyun.domain}")
     private lateinit var domain:String
 
@@ -29,15 +31,14 @@ object OSSTools {
     @Value("\${aliyun.dir}")
     private lateinit var dir:String
 
-    private val ossClint = getOSSClint()
     fun putPicture(p: Picture, stream: InputStream, fileDetail: FormDataContentDisposition) {
         var fileName = fileDetail.fileName
-        println(fileName+" type"+fileDetail.type)
-        val sufix = fileName?.split("\\.")?.get(1) ?:"jpg"
+        val ossClint:OSS = getOSSClint()
+        val sufix = fileName?.split(".")?.get(1) ?:"jpg"
         val date = SimpleDateFormat("_yyyyMMdd-hhmmss").format(System.currentTimeMillis())
         fileName = p.title+date+"."+sufix
         try {
-            ossClint?.putObject(PutObjectRequest(bucketName,fileName,stream))
+            ossClint.putObject(PutObjectRequest(bucketName,dir.substring(1)+"/"+fileName,stream))
             p.url = "https://${bucketName}.${domain}${dir}/$fileName"
         }catch (oe: OSSException){
             println("Caught an OSSException, which means your request made it to OSS, "
@@ -52,14 +53,15 @@ object OSSTools {
                     + "such as not being able to access the network.")
             println("Error Message:" + ce.message)
         }finally {
-            ossClint?.shutdown()
+            ossClint.shutdown()
         }
     }
 
     fun deletePicture(@Valid p: Picture){
+        val ossClint:OSS = getOSSClint()
         val fileName = p.url?.let { it.substring(it.lastIndexOf(dir)) }
         try {
-            ossClint?.deleteObject(bucketName,fileName)
+            ossClint.deleteObject(bucketName,fileName)
         }catch (oe:OSSException){
             println("Caught an OSSException, which means your request made it to OSS, "
                     + "but was rejected with an error response for some reason.")
@@ -73,15 +75,16 @@ object OSSTools {
                     + "such as not being able to access the network.")
             println("Error Message:" + ce.message)
         }finally {
-            ossClint?.shutdown()
+            ossClint.shutdown()
         }
 
 
 
     }
 
-    private fun getOSSClint(): OSS? {
-        val endpoint = "https://$domain"
+    @Bean
+    private fun getOSSClint(): OSS {
+        val endpoint = "https://${domain}"
         val clientConfig = ClientBuilderConfiguration()
         clientConfig.protocol = Protocol.HTTPS
         return OSSClientBuilder().build(endpoint, accessKeyId, accessKeySecret, clientConfig)

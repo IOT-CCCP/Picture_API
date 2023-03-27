@@ -1,7 +1,7 @@
 package pro.tonal.all.spring_boot_3.applicaition
 
+import jakarta.inject.Inject
 import jakarta.inject.Named
-import jakarta.transaction.Transactional
 import jakarta.validation.ConstraintViolationException
 import jakarta.validation.Valid
 import jakarta.validation.constraints.NotNull
@@ -12,8 +12,10 @@ import java.io.InputStream
 import java.util.*
 
 @Named
-@Transactional
-class PictureApplicationService(private val pictureService: PictureService) {
+//@Transactional
+open class PictureApplicationService {
+    @Inject
+    private lateinit var pictureService:PictureService
     fun createPicture(title:String,stream: InputStream,fileDetail: FormDataContentDisposition): Picture {
         return pictureService.createPicture(title,stream, fileDetail)
     }

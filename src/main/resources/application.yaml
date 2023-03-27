@@ -1,4 +1,8 @@
 spring:
+  mvc:
+    hidden-method:
+      filter:
+        enabled: true
   jersey:
     type: servlet
     servlet:
@@ -43,7 +47,7 @@ server:
     register-default-servlet: true
 
 aliyun:
-  domain: oss-cn-beijing.aliyun.com
+  domain: oss-cn-beijing.aliyuncs.com
   bucketName: tonall
   accessKeyId: LTAI5tLcm3H72Rm1Wmcskwv7
   accessKeySecret: Dsz2UZcNGNHit64TkfcLvkcGYkI8jJ

@@ -1,6 +1,7 @@
 package pro.tonal.all.spring_boot_3.domain.picture
 
 
+import jakarta.inject.Inject
 import jakarta.inject.Named
 import org.glassfish.jersey.media.multipart.FormDataContentDisposition
 import pro.tonal.all.spring_boot_3.infrastructure.utility.OSSTools
@@ -8,8 +9,9 @@ import java.io.InputStream
 import java.util.*
 
 @Named
-class PictureService(private var pictureRepository:PictureRepository) {
-    private val ossTools = OSSTools
+open class PictureService() {
+    @Inject private lateinit var ossTools:OSSTools
+    @Inject private lateinit var pictureRepository:PictureRepository
     fun createPicture(title:String, stream: InputStream, fileDetail: FormDataContentDisposition): Picture {
         val picture = Picture().apply {
             this.title = title

@@ -9,8 +9,10 @@ import org.springframework.context.annotation.ClassPathScanningCandidateComponen
 import org.springframework.context.annotation.Configuration
 import org.springframework.core.type.filter.AnnotationTypeFilter
 import org.springframework.util.ClassUtils
+import pro.tonal.all.spring_boot_3.infrastructure.configuration.jerseyProvider.ResponseFilter
 import java.util.*
 import java.util.stream.Collectors
+
 
 @Configuration
 @ApplicationPath("/api")
@@ -19,6 +21,8 @@ class JerseyConfiguration : ResourceConfig() {
         scanPackages("pro.tonal.all.spring_boot_3.resource")
         scanPackages("pro.tonal.all.spring_boot_3.infrastructure.jaxrc")
         scanPackages("pro.tonal.all.spring_boot_3.infrastructure.configuration.jerseyProvider")
+//        registerClasses(JacksonJsonProvider::class.java)
+//        registerClasses(MultiPartFeature::class.java)
     }
 
     /**
