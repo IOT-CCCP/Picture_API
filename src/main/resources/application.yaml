@@ -15,12 +15,12 @@ spring:
   datasource:
     url: jdbc:mysql://rsshub.tonal-all.pro:3306/tonal
     username: root
-    password: Maker0000.
+    password: xxxxxxxx
   data:
     redis:
       host: rsshub.tonal-all.pro
       database: 0
-      password: Maker0000.
+      password: xxxxxxx
       jedis:
         pool:
           max-wait: 10ms
@@ -49,6 +49,6 @@ server:
 aliyun:
   domain: oss-cn-beijing.aliyuncs.com
   bucketName: tonall
-  accessKeyId: LTAI5tLcm3H72Rm1Wmcskwv7
-  accessKeySecret: Dsz2UZcNGNHit64TkfcLvkcGYkI8jJ
+  accessKeyId: xxxxxxxxxxxxxxxxxxxx
+  accessKeySecret: xxxxxxxxxxxxxxxxxx
   dir: /img
